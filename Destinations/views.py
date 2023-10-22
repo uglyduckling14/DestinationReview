@@ -70,7 +70,7 @@ def sign_in(req): #sessions/new and sessions #working
                     token = secrets.token_hex(64)
                 )
                 session.save()
-                res = render(req, "core/destinations.html")
+                res = render(req, "core/destinations.html",{"Destinations": Destination.objects.all(), "Session": session})
                 res.set_cookie('session_token',session.token)
                 return res
             else:
@@ -144,13 +144,21 @@ def destroy_destination(req, id):#destinations/id/destroy
         return HttpResponseNotFound("destination not found!")
 
 def index(req: HttpRequest):
-    destinations = Destination.objects.order_by('id')[:5]
-    return render(req, "core/index.html", {"Destinations": destinations})
+    destinations = Destination.objects.filter(share_publicly=True).order_by('id')[:5]
+    token = req.COOKIES.get('session_token')
+    try:
+        session = Session.objects.get(token=token)
+        session = True
+    except Session.DoesNotExist:
+        session = False
+    return render(req, "core/index.html", {"Destinations": destinations, "isSession": session})
 
 def destroy_session(req):#sessions/destroy #working
     token = req.COOKIES.get('session_token')
     session = Session.objects.filter(token=token).first()
 
     session.delete()
-    return redirect("/")
+    res = redirect("/")
+    res.delete_cookie('session_token')
+    return res
     

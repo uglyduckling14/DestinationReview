@@ -1,14 +1,26 @@
 {%load static%}
 <!DOCTYPE html>
 <html>
-    
-    <a href = "{%url 'sign_up'%}" id ="sign_up">Sign up</a>
-    <a href ="{%url 'sign_in'%}" id = "sign_in">Log In</a>
-    <div class="destinations_home">
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" /> 
+    </head>
+    <header>
+        <h1>Destination Reviews</h1>
+        {%if isSession%}
+            <a href ="{%url 'destinations'%}" id = "destinations">Destinations</a>
+        {%else%}
+            <a href = "{%url 'sign_up'%}" id ="sign_up">Sign up</a>
+            <a href ="{%url 'sign_in'%}" id = "sign_in">Log In</a>
+        {%endif%}
+        
+    </header>
+    <div class="destinations">
         {% if Destinations%}
             {% for destination in Destinations%}
-                <div>
+                <div class="destination-box">
                     <h2>{{destination.name}}</h2>
+                    <span><b>{{destination.rating}}/5 rating<br></b></span>
+                    <span>{{destination.review}}</span>
                 </div>
             {%endfor%}
         {%endif%}

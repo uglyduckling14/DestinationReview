@@ -1,22 +1,26 @@
+{%load static%}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Home Page</title>
-    
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" /> 
+    </head>
 <body>
+    <header class = "destinations">
+        <a href = "{%url 'create_destination'%}" id = "create_destination">New Destination</a>
+        <a href ="{%url 'destroy_session'%}" id = "destroy_session">Log Out</a>
+    </header>
     <div class = destinations>
         {% if Destinations%}
             {% for destination in Destinations%}
                 {% if destination.user == Session.user%}
-                    <div>
+                    <div class = destination-box>
                         <h2><a href = "{%url 'edit' destination.id%}" id = "destination.id">{{destination.name}}</a></h2>
+                        <span><b>{{destination.rating}}/5 rating<br></b></span>
+                        <span>{{destination.review}}</span>
                     </div>
                 {%endif%}
             {%endfor%}
         {%endif%}
     </div>
-    <a href = "{%url 'create_destination'%}" id = "create_destination">New Destination</a>
-    <a href ="{%url 'destroy_session'%}" id = "destroy_session">Log Out</a>
 </body>
 </html>

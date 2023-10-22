@@ -1,9 +1,9 @@
+{%load static%}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Destination Page</title>
-    
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" /> 
+    </head>
 <body>
     <div class="login-container">
         <form action="{% url 'edit' Destination.id %}" method="POST">
@@ -33,7 +33,7 @@
             <input type="submit" value="Submit">
         </form>
         <form action="{%url 'destroy_dest' Destination.id %}" method ="POST">
-            <input type="submit" value ="Exit">
+            <input type="submit" value ="Delete">
         </form>
     </div>
 </body>
