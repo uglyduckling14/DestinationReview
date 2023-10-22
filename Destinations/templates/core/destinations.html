@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    
+</head>
+<body>
+    <div class = destinations>
+        {% if Destinations%}
+            {% for destination in Destinations%}
+                {% if destination.user == Session.user%}
+                    <div>
+                        <h2><a href = "{%url 'edit' destination.id%}" id = "destination.id">{{destination.name}}</a></h2>
+                    </div>
+                {%endif%}
+            {%endfor%}
+        {%endif%}
+    </div>
+    <a href = "{%url 'create_destination'%}" id = "create_destination">New Destination</a>
+    <a href ="{%url 'destroy_session'%}" id = "destroy_session">Log Out</a>
+</body>
+</html>

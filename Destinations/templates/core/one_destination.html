@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Destination Page</title>
+    
+</head>
+<body>
+    <div class="login-container">
+        <form action="{% url 'edit' Destination.id %}" method="POST">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" id="name" name = "name" value = "{{Destination.name}}" required>
+            <label for="review">Review:</label>
+            <input type="text" id="review" name = "review" value = "{{Destination.review}}" required>
+            <div class = "ratings_container">
+                <label for="rating">Rating:</label>
+                {%for r in "12345"%}
+                    <label for={{r}}>{{r}}</label>
+                    {%if r == Destination.rating|stringformat:"d"%}
+                        <input type="radio" id={{r}} name="rating" value = {{r}} checked>
+                    {%else%}
+                        <input type="radio" id={{r}} name="rating" value = {{r}}>
+                    {%endif%}
+                {%endfor%}
+            </div>
+            <label for="share">Share Publicly?</label>
+            {%if Destination.share_publicly%}
+                <input type="checkbox" id="public" name="public" checked>
+            {%else%}
+                <input type="checkbox" id="public" name="public">
+            {%endif%}
+            
+            <input type="submit" value="Submit">
+        </form>
+        <form action="{%url 'destroy_dest' Destination.id %}" method ="POST">
+            <input type="submit" value ="Exit">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Destination Page</title>
+    
+</head>
+<body>
+    <div class="login-container">
+        <h2>New Destination</h2>
+        <form action="/destinations" method="POST">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="review">Review:</label>
+            <input type="text" id="review" name="review" required>
+            <div class = "ratings_container">
+                <label for="rating">Rating:</label>
+                <label for ="1">1</label>
+                <input type="radio" id="1" name="rating" value = "1">
+                <label for ="2">2</label>
+                <input type="radio" id="2" name="rating" value = "2">
+                <label for ="3">3</label>
+                <input type="radio" id="3" name="rating" value = "3">
+                <label for ="4">4</label>
+                <input type="radio" id="4" name="rating" value = "4">
+                <label for ="5">5</label>
+                <input type="radio" id="5" name="rating" value = "5">
+            </div>
+            <label for="share">Share Publicly?</label>
+            <input type="checkbox" id="public" name="public">
+            
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

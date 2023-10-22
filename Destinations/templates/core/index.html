@@ -1,0 +1,17 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    
+    <a href = "{%url 'sign_up'%}" id ="sign_up">Sign up</a>
+    <a href ="{%url 'sign_in'%}" id = "sign_in">Log In</a>
+    <div class="destinations_home">
+        {% if Destinations%}
+            {% for destination in Destinations%}
+                <div>
+                    <h2>{{destination.name}}</h2>
+                </div>
+            {%endfor%}
+        {%endif%}
+    </div>
+
+</html>
